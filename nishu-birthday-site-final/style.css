@@ -574,6 +574,58 @@ button:focus-visible {
 .proceed-btn:hover{ transform:translateY(-3px); }
 
 /* =============================================================
+   BIRTHDAY REVEAL — animations triggered after candles blow out
+   ============================================================= */
+
+/* Title pops in from slight scale/translate */
+.bday-revealed {
+  animation: bday-title-pop 0.72s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+@keyframes bday-title-pop {
+  0%   { opacity: 0; transform: scale(0.75) translateY(18px); }
+  60%  { transform: scale(1.06) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* "Nishu!" gold name — continuous glow pulse */
+.bday-name {
+  display: inline-block;
+  animation: bday-name-glow 1.8s ease-in-out infinite alternate;
+  animation-delay: 0.8s;
+}
+@keyframes bday-name-glow {
+  from {
+    text-shadow: 0 0 8px rgba(212,175,55,0.35), 0 2px 12px rgba(166,41,75,0.2);
+  }
+  to {
+    text-shadow:
+      0 0 26px rgba(212,175,55,0.85),
+      0 0 52px rgba(212,175,55,0.45),
+      0 4px 18px rgba(166,41,75,0.35);
+  }
+}
+
+/* Shimmer sweep across the title after reveal */
+.bday-revealed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(212,175,55,0.22) 50%,
+    transparent 70%
+  );
+  animation: bday-shimmer 1.6s ease 0.9s 1 forwards;
+  pointer-events: none;
+}
+@keyframes bday-shimmer {
+  0%   { transform: translateX(-120%); opacity: 1; }
+  100% { transform: translateX(140%);  opacity: 0; }
+}
+
+
+/* =============================================================
    CELEBRATION LAYER — behind text, in front of background
    ============================================================= */
 #celebration-video{
@@ -889,16 +941,20 @@ button:focus-visible {
 }
 
 .reasons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.8rem;
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .reason-card {
-  perspective: 1200px;
+  flex: 0 1 calc(25% - 1.35rem);
+  min-width: 210px;
+  max-width: 260px;
   height: 250px;
+  perspective: 1200px;
 }
 
 .reason-inner {

@@ -328,20 +328,56 @@ const Confetti = (function () {
     video.currentTime = 0;
     video.play().then(() => {
       video.classList.add('playing');
-    }).catch(() => {
-      // placeholder src / autoplay blocked / no real video yet — canvas alone carries the moment
-    });
+    }).catch(() => { });
     runCelebrationCanvas();
     window.__startBgMusic && window.__startBgMusic();
 
+    const heroTitle = gate.querySelector('.hero-title');
+    const heroSub = gate.querySelector('.hero-sub');
+
+    // ── 1. Swap the big title ──────────────────────────────────────
+    setTimeout(() => {
+      heroTitle.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      heroTitle.style.opacity = '0';
+      heroTitle.style.transform = 'scale(0.8) translateY(12px)';
+      setTimeout(() => {
+        heroTitle.innerHTML =
+          '🎉 Happy Birthday,<br><span class="gold bday-name">Nishu!</span> 🎂';
+        heroTitle.classList.add('bday-revealed');
+        heroTitle.style.opacity = '1';
+        heroTitle.style.transform = 'scale(1) translateY(0)';
+      }, 420);
+    }, 150);
+
+    // ── 2. Swap the subtitle ───────────────────────────────────────
+    setTimeout(() => {
+      heroSub.style.transition = 'opacity 0.4s ease';
+      heroSub.style.opacity = '0';
+      setTimeout(() => {
+        heroSub.innerHTML =
+          'Happy Birthday to the cutest Panda in the world 🐼🎉';
+        heroSub.style.opacity = '1';
+      }, 400);
+    }, 350);
+
+    // ── 3. Instruction line + proceed button ───────────────────────
     setTimeout(() => {
       instruction.style.opacity = 0;
       setTimeout(() => {
-        instruction.textContent = "Congratulations, Nishu! Your future is brighter than any flame. We're so excited to celebrate with you.";
+        instruction.textContent =
+          "Many many Happy returns of the day 🎂 Your future is brighter than any flame. " +
+          "I'm very happy on this day and wish you Happy Birthday, Panda 🐼💖";
         instruction.style.opacity = 1;
       }, 400);
       proceedBtn.classList.add('shown');
-    }, 500);
+    }, 600);
+
+    // ── 4. Staggered confetti bursts across the screen ─────────────
+    setTimeout(() => Confetti.burst(0.15, 0.25, 80), 300);
+    setTimeout(() => Confetti.burst(0.85, 0.25, 80), 600);
+    setTimeout(() => Confetti.burst(0.50, 0.10, 100), 900);
+    setTimeout(() => Confetti.burst(0.25, 0.50, 65), 1200);
+    setTimeout(() => Confetti.burst(0.75, 0.50, 65), 1500);
   }
 
   async function startMicListening() {

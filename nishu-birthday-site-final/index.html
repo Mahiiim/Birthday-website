@@ -46,21 +46,22 @@
     <!-- bottom-left decorative floral corner flourish -->
     <div class="hero-floral" aria-hidden="true">
       <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--gold)" stroke-width="2.2">
-        <path d="M4 216 C 40 200, 55 175, 48 150 C 42 130, 20 128, 15 145 C 11 158, 25 165, 34 155"/>
-        <path d="M4 216 C 60 210, 100 195, 118 165 C 135 138, 128 105, 100 95 C 78 87, 62 105, 72 122 C 80 135, 100 130, 100 115"/>
-        <path d="M118 165 C 145 178, 175 172, 190 150 C 202 132, 195 108, 172 105 C 155 103, 145 118, 158 128"/>
-        <path d="M4 216 C 90 214, 150 200, 185 175"/>
+        <path d="M4 216 C 40 200, 55 175, 48 150 C 42 130, 20 128, 15 145 C 11 158, 25 165, 34 155" />
+        <path
+          d="M4 216 C 60 210, 100 195, 118 165 C 135 138, 128 105, 100 95 C 78 87, 62 105, 72 122 C 80 135, 100 130, 100 115" />
+        <path d="M118 165 C 145 178, 175 172, 190 150 C 202 132, 195 108, 172 105 C 155 103, 145 118, 158 128" />
+        <path d="M4 216 C 90 214, 150 200, 185 175" />
         <g fill="var(--rose-mid)" stroke="none">
-          <circle cx="34" cy="155" r="6"/>
-          <circle cx="72" cy="122" r="7"/>
-          <ellipse cx="100" cy="95" rx="14" ry="10" transform="rotate(-20 100 95)"/>
-          <circle cx="158" cy="128" r="6"/>
-          <ellipse cx="188" cy="150" rx="12" ry="9" transform="rotate(15 188 150)"/>
+          <circle cx="34" cy="155" r="6" />
+          <circle cx="72" cy="122" r="7" />
+          <ellipse cx="100" cy="95" rx="14" ry="10" transform="rotate(-20 100 95)" />
+          <circle cx="158" cy="128" r="6" />
+          <ellipse cx="188" cy="150" rx="12" ry="9" transform="rotate(15 188 150)" />
         </g>
         <g fill="var(--gold-soft)" stroke="none" opacity="0.85">
-          <ellipse cx="58" cy="140" rx="7" ry="4" transform="rotate(30 58 140)"/>
-          <ellipse cx="140" cy="112" rx="7" ry="4" transform="rotate(-25 140 112)"/>
-          <ellipse cx="170" cy="140" rx="6" ry="4" transform="rotate(10 170 140)"/>
+          <ellipse cx="58" cy="140" rx="7" ry="4" transform="rotate(30 58 140)" />
+          <ellipse cx="140" cy="112" rx="7" ry="4" transform="rotate(-25 140 112)" />
+          <ellipse cx="170" cy="140" rx="6" ry="4" transform="rotate(10 170 140)" />
         </g>
       </svg>
     </div>
@@ -77,49 +78,52 @@
     <!-- celebration layer: video (optional) + canvas, sits behind the text -->
     <!-- 🎥 REPLACE the src below with a real fireworks/celebration video URL.
          If left as-is (or if it fails to load), the canvas sparkle burst plays instead automatically. -->
-    <video id="celebration-video" muted playsinline loop
-           src="REPLACE-WITH-YOUR-CELEBRATION-VIDEO.mp4"></video>
+    <video id="celebration-video" muted playsinline loop src="REPLACE-WITH-YOUR-CELEBRATION-VIDEO.mp4"></video>
     <canvas id="celebration-canvas"></canvas>
 
     <div class="hero-content">
-      <h1 class="hero-title">Happy Birthday, <span class="gold">Nishu!</span></h1>
+      <h1 class="hero-title">There's a cake waiting for you </h1>
       <!-- PERSONALIZE: replace with something only you'd say to her -->
-      <p class="hero-sub">I've been counting down for 3 days for your birthday. Your birthday is one of the most
-        important days in my life, so today I'm so happy to send you my wishes💌</p>
+      <p class="hero-sub">I made something just for you but it's locked behind these candles.Take a deep breath, and
+        blow them out 🕯️</p>
 
       <div class="candle-stage">
         <div class="candle-wrap cake-wrap">
           <svg viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="130" cy="190" rx="112" ry="12" fill="#F0C6CE" opacity="0.55"/>
-            <rect x="38" y="128" width="184" height="58" rx="10" fill="#A6294B"/>
-            <rect x="54" y="96"  width="152" height="46" rx="10" fill="#C9576F"/>
-            <rect x="76" y="70"  width="108" height="38" rx="10" fill="#F7D9DE"/>
-            <path d="M38 128 Q53 143 68 128 T98 128 T128 128 T158 128 T188 128 T222 128"
-                  fill="none" stroke="#D4AF37" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+            <ellipse cx="130" cy="190" rx="112" ry="12" fill="#F0C6CE" opacity="0.55" />
+            <rect x="38" y="128" width="184" height="58" rx="10" fill="#A6294B" />
+            <rect x="54" y="96" width="152" height="46" rx="10" fill="#C9576F" />
+            <rect x="76" y="70" width="108" height="38" rx="10" fill="#F7D9DE" />
+            <path d="M38 128 Q53 143 68 128 T98 128 T128 128 T158 128 T188 128 T222 128" fill="none" stroke="#D4AF37"
+              stroke-width="5" stroke-linecap="round" opacity="0.85" />
 
             <!-- three candles — no click handlers; blown out only by an actual mic-detected breath -->
             <g>
-              <rect x="93" y="48" width="6" height="26" fill="#F7D9DE"/>
-              <ellipse class="smoke" data-smoke="1" cx="96" cy="33" rx="5" ry="10" fill="#c9b8b0" opacity="0"/>
-              <circle class="flame-glow" data-glow="1" cx="96" cy="42" r="16" fill="#D4AF37" opacity="0.4"/>
-              <path class="flame" data-flame="1" d="M96 26 C102 34 105 41 96 50 C87 41 90 34 96 26 Z" fill="#F2A65A"/>
+              <rect x="93" y="48" width="6" height="26" fill="#F7D9DE" />
+              <ellipse class="smoke" data-smoke="1" cx="96" cy="33" rx="5" ry="10" fill="#c9b8b0" opacity="0" />
+              <circle class="flame-glow" data-glow="1" cx="96" cy="42" r="16" fill="#D4AF37" opacity="0.4" />
+              <path class="flame" data-flame="1" d="M96 26 C102 34 105 41 96 50 C87 41 90 34 96 26 Z" fill="#F2A65A" />
             </g>
             <g>
-              <rect x="127" y="42" width="6" height="32" fill="#F7D9DE"/>
-              <ellipse class="smoke" data-smoke="2" cx="130" cy="25" rx="5" ry="10" fill="#c9b8b0" opacity="0"/>
-              <circle class="flame-glow" data-glow="2" cx="130" cy="35" r="16" fill="#D4AF37" opacity="0.4"/>
-              <path class="flame" data-flame="2" d="M130 18 C136 27 139 35 130 45 C121 35 124 27 130 18 Z" fill="#F2A65A"/>
+              <rect x="127" y="42" width="6" height="32" fill="#F7D9DE" />
+              <ellipse class="smoke" data-smoke="2" cx="130" cy="25" rx="5" ry="10" fill="#c9b8b0" opacity="0" />
+              <circle class="flame-glow" data-glow="2" cx="130" cy="35" r="16" fill="#D4AF37" opacity="0.4" />
+              <path class="flame" data-flame="2" d="M130 18 C136 27 139 35 130 45 C121 35 124 27 130 18 Z"
+                fill="#F2A65A" />
             </g>
             <g>
-              <rect x="161" y="48" width="6" height="26" fill="#F7D9DE"/>
-              <ellipse class="smoke" data-smoke="3" cx="164" cy="33" rx="5" ry="10" fill="#c9b8b0" opacity="0"/>
-              <circle class="flame-glow" data-glow="3" cx="164" cy="42" r="16" fill="#D4AF37" opacity="0.4"/>
-              <path class="flame" data-flame="3" d="M164 26 C170 34 173 41 164 50 C155 41 158 34 164 26 Z" fill="#F2A65A"/>
+              <rect x="161" y="48" width="6" height="26" fill="#F7D9DE" />
+              <ellipse class="smoke" data-smoke="3" cx="164" cy="33" rx="5" ry="10" fill="#c9b8b0" opacity="0" />
+              <circle class="flame-glow" data-glow="3" cx="164" cy="42" r="16" fill="#D4AF37" opacity="0.4" />
+              <path class="flame" data-flame="3" d="M164 26 C170 34 173 41 164 50 C155 41 158 34 164 26 Z"
+                fill="#F2A65A" />
             </g>
           </svg>
         </div>
 
-        <div class="hero-mic-meter" id="heroMicMeter"><div class="hero-mic-meter-fill" id="heroMicMeterFill"></div></div>
+        <div class="hero-mic-meter" id="heroMicMeter">
+          <div class="hero-mic-meter-fill" id="heroMicMeterFill"></div>
+        </div>
 
         <p class="candle-instruction" id="candleInstruction">
           Requesting microphone access…
@@ -143,10 +147,22 @@
       important days in my life, so today I'm so happy to send you my wishes 💌</p>
 
     <div class="countdown" id="countdown" aria-live="polite">
-      <div class="unit"><div class="num" id="cd-days">00</div><div class="label">Days</div></div>
-      <div class="unit"><div class="num" id="cd-hours">00</div><div class="label">Hours</div></div>
-      <div class="unit"><div class="num" id="cd-mins">00</div><div class="label">Minutes</div></div>
-      <div class="unit"><div class="num" id="cd-secs">00</div><div class="label">Seconds</div></div>
+      <div class="unit">
+        <div class="num" id="cd-days">00</div>
+        <div class="label">Days</div>
+      </div>
+      <div class="unit">
+        <div class="num" id="cd-hours">00</div>
+        <div class="label">Hours</div>
+      </div>
+      <div class="unit">
+        <div class="num" id="cd-mins">00</div>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="unit">
+        <div class="num" id="cd-secs">00</div>
+        <div class="label">Seconds</div>
+      </div>
     </div>
 
     <a href="#timeline" class="cta-btn">See Your Journey</a>
@@ -282,6 +298,7 @@
     </div>
 
     <div class="reasons-grid">
+
       <div class="reason-card reveal" tabindex="0">
         <div class="reason-inner">
           <div class="reason-face reason-front">
@@ -290,7 +307,6 @@
             <p class="hint">hover to reveal</p>
           </div>
           <div class="reason-face reason-back">
-            <!-- PERSONALIZE -->
             <p>I fell in love the very first time I saw that cuteee smile on your beautiful, loving face 🫶🏽🌸</p>
           </div>
         </div>
@@ -304,13 +320,10 @@
             <p class="hint">hover to reveal</p>
           </div>
           <div class="reason-face reason-back">
-            <!-- PERSONALIZE -->
-            <p>Having the same feelings and the same love for me now makes me so happy makes me feel so loved. 💗</p>
+            <p>Having the same feelings and the same love for me now makes me so happy it makes me feel so loved. 💗</p>
           </div>
         </div>
       </div>
-
-
 
       <div class="reason-card reveal" tabindex="0">
         <div class="reason-inner">
@@ -320,9 +333,7 @@
             <p class="hint">hover to reveal</p>
           </div>
           <div class="reason-face reason-back">
-            <!-- PERSONALIZE -->
-            <p>Always. Your support during any bad time, everything it’s one of the biggest blessings of my life.🫶🏽
-            </p>
+            <p>Always there. Your support during any hard time is one of the biggest blessings of my life. 🫶🏽</p>
           </div>
         </div>
       </div>
@@ -335,43 +346,41 @@
             <p class="hint">hover to reveal</p>
           </div>
           <div class="reason-face reason-back">
-            <!-- PERSONALIZE -->
-            <p>I love very simple people who have no ego or attitude. And you’re a lot like that. You’re that simple
+            <p>I love simple people with no ego or attitude and you are exactly that. You are that simple, beautiful
               person in my life. 🤍</p>
           </div>
         </div>
       </div>
-    </div>
-    <div class="reason-card reveal" tabindex="0">
-      <div class="reason-inner">
-        <div class="reason-face reason-front">
-          <div class="icon">🤗</div>
-          <h3>Your Care</h3>
-          <p class="hint">hover to reveal</p>
-        </div>
-        <div class="reason-face reason-back">
-          <!-- PERSONALIZE -->
-          <p>Your love, your care, everything — they are the biggest blessings in my life. I always want this kind of
-            care from you.🤗</p>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-    <div class="reason-card reveal" tabindex="0">
-      <div class="reason-inner">
-        <div class="reason-face reason-front">
-          <div class="icon">❤️</div>
-          <h3>Full of you</h3>
-          <p class="hint">hover to reveal</p>
-        </div>
-        <div class="reason-face reason-back">
-          <!-- PERSONALIZE -->
-          <p>At the end of the day, my heart is full of you. I feel so loved. I love everything about you. I love the
-            complete you.❤️🌸</p>
+
+      <!-- Bottom row — 2 cards centred -->
+      <div class="reason-card reveal reason-card--wide" tabindex="0">
+        <div class="reason-inner">
+          <div class="reason-face reason-front">
+            <div class="icon">🤗</div>
+            <h3>Your Care</h3>
+            <p class="hint">hover to reveal</p>
+          </div>
+          <div class="reason-face reason-back">
+            <p>Your love, your care, everything they are the biggest blessings in my life. I always want this kind of
+              care from you. 🤗</p>
+          </div>
         </div>
       </div>
-    </div>
+
+      <div class="reason-card reveal reason-card--wide" tabindex="0">
+        <div class="reason-inner">
+          <div class="reason-face reason-front">
+            <div class="icon">❤️</div>
+            <h3>Full of You</h3>
+            <p class="hint">hover to reveal</p>
+          </div>
+          <div class="reason-face reason-back">
+            <p>At the end of the day, my heart is full of you. I feel so loved. I love everything about you the complete
+              you. ❤️🌸</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
