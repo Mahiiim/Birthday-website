@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Nishu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ============================================================
+     ✍️ HOW TO PERSONALIZE THIS FILE
+     Every place you see a comment starting with "PERSONALIZE:" is a
+     spot where I've written something honest but general, because I
+     don't know your real story. Swap those lines for the real memory,
+     joke, or detail only you have — that's what will actually land.
+     ============================================================ -->
+
+  <div class="particle-field" id="particleField" aria-hidden="true"></div>
+
+  <button class="music-toggle" id="musicToggle" aria-label="Play background music" aria-pressed="false">
+    <svg id="playIcon" viewBox="0 0 24 24">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+    <span class="bars" id="eqBars"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+  </button>
+
+  <!-- ============================================================
+     1. ENTERING GATE — the candle-blow interaction, unchanged, now
+     as a fixed overlay she meets first. Candles are blown out only
+     by an actual mic-detected breath, never by clicking.
+     ============================================================ -->
+  <div class="hero" id="enteringGate">
+
+    <!-- falling gold confetti + rose petals, scoped to the gate -->
+    <div class="falling-field" id="fallingField" aria-hidden="true"></div>
+
+    <!-- bottom-left decorative floral corner flourish -->
+    <div class="hero-floral" aria-hidden="true">
+      <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="var(--gold)" stroke-width="2.2">
+        <path d="M4 216 C 40 200, 55 175, 48 150 C 42 130, 20 128, 15 145 C 11 158, 25 165, 34 155"/>
+        <path d="M4 216 C 60 210, 100 195, 118 165 C 135 138, 128 105, 100 95 C 78 87, 62 105, 72 122 C 80 135, 100 130, 100 115"/>
+        <path d="M118 165 C 145 178, 175 172, 190 150 C 202 132, 195 108, 172 105 C 155 103, 145 118, 158 128"/>
+        <path d="M4 216 C 90 214, 150 200, 185 175"/>
+        <g fill="var(--rose-mid)" stroke="none">
+          <circle cx="34" cy="155" r="6"/>
+          <circle cx="72" cy="122" r="7"/>
+          <ellipse cx="100" cy="95" rx="14" ry="10" transform="rotate(-20 100 95)"/>
+          <circle cx="158" cy="128" r="6"/>
+          <ellipse cx="188" cy="150" rx="12" ry="9" transform="rotate(15 188 150)"/>
+        </g>
+        <g fill="var(--gold-soft)" stroke="none" opacity="0.85">
+          <ellipse cx="58" cy="140" rx="7" ry="4" transform="rotate(30 58 140)"/>
+          <ellipse cx="140" cy="112" rx="7" ry="4" transform="rotate(-25 140 112)"/>
+          <ellipse cx="170" cy="140" rx="6" ry="4" transform="rotate(10 170 140)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- bottom-right "college album", fixed 50% opacity -->
+    <div class="hero-album" aria-hidden="true">
+      <!-- 🖼️ REPLACE all 4 with real photos of Nishu -->
+      <img src="https://via.placeholder.com/180x220" alt="">
+      <img src="https://via.placeholder.com/180x220" alt="">
+      <img src="https://via.placeholder.com/180x220" alt="">
+      <img src="https://via.placeholder.com/180x220" alt="">
+    </div>
+
+    <!-- celebration layer: video (optional) + canvas, sits behind the text -->
+    <!-- 🎥 REPLACE the src below with a real fireworks/celebration video URL.
+         If left as-is (or if it fails to load), the canvas sparkle burst plays instead automatically. -->
+    <video id="celebration-video" muted playsinline loop
+           src="REPLACE-WITH-YOUR-CELEBRATION-VIDEO.mp4"></video>
+    <canvas id="celebration-canvas"></canvas>
+
+    <div class="hero-content">
+      <h1 class="hero-title">Happy Birthday, <span class="gold">Nishu!</span></h1>
+      <!-- PERSONALIZE: replace with something only you'd say to her -->
+      <p class="hero-sub">I've been counting down for 3 days for your birthday. Your birthday is one of the most
+        important days in my life, so today I'm so happy to send you my wishes💌</p>
+
+      <div class="candle-stage">
+        <div class="candle-wrap cake-wrap">
+          <svg viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="130" cy="190" rx="112" ry="12" fill="#F0C6CE" opacity="0.55"/>
+            <rect x="38" y="128" width="184" height="58" rx="10" fill="#A6294B"/>
+            <rect x="54" y="96"  width="152" height="46" rx="10" fill="#C9576F"/>
+            <rect x="76" y="70"  width="108" height="38" rx="10" fill="#F7D9DE"/>
+            <path d="M38 128 Q53 143 68 128 T98 128 T128 128 T158 128 T188 128 T222 128"
+                  fill="none" stroke="#D4AF37" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+
+            <!-- three candles — no click handlers; blown out only by an actual mic-detected breath -->
+            <g>
+              <rect x="93" y="48" width="6" height="26" fill="#F7D9DE"/>
+              <ellipse class="smoke" data-smoke="1" cx="96" cy="33" rx="5" ry="10" fill="#c9b8b0" opacity="0"/>
+              <circle class="flame-glow" data-glow="1" cx="96" cy="42" r="16" fill="#D4AF37" opacity="0.4"/>
+              <path class="flame" data-flame="1" d="M96 26 C102 34 105 41 96 50 C87 41 90 34 96 26 Z" fill="#F2A65A"/>
+            </g>
+            <g>
+              <rect x="127" y="42" width="6" height="32" fill="#F7D9DE"/>
+              <ellipse class="smoke" data-smoke="2" cx="130" cy="25" rx="5" ry="10" fill="#c9b8b0" opacity="0"/>
+              <circle class="flame-glow" data-glow="2" cx="130" cy="35" r="16" fill="#D4AF37" opacity="0.4"/>
+              <path class="flame" data-flame="2" d="M130 18 C136 27 139 35 130 45 C121 35 124 27 130 18 Z" fill="#F2A65A"/>
+            </g>
+            <g>
+              <rect x="161" y="48" width="6" height="26" fill="#F7D9DE"/>
+              <ellipse class="smoke" data-smoke="3" cx="164" cy="33" rx="5" ry="10" fill="#c9b8b0" opacity="0"/>
+              <circle class="flame-glow" data-glow="3" cx="164" cy="42" r="16" fill="#D4AF37" opacity="0.4"/>
+              <path class="flame" data-flame="3" d="M164 26 C170 34 173 41 164 50 C155 41 158 34 164 26 Z" fill="#F2A65A"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="hero-mic-meter" id="heroMicMeter"><div class="hero-mic-meter-fill" id="heroMicMeterFill"></div></div>
+
+        <p class="candle-instruction" id="candleInstruction">
+          Requesting microphone access…
+        </p>
+        <button class="hero-retry-btn" id="micRetryBtn" hidden>Allow microphone access</button>
+
+        <button class="proceed-btn" id="proceedBtn">Proceed to our story</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     2. FRONT PAGE — revealed once the candles are blown out.
+     Countdown to July 17, then onward into the full site.
+     ============================================================ -->
+  <section class="hero front-hero" id="hero">
+    <p class="hero-eyebrow">17th of July</p>
+    <h1 class="hero-title">Happy Birthday,<br>Nishu <span class="heart">❤</span></h1>
+    <!-- PERSONALIZE: replace with something only you'd say to her -->
+    <p class="hero-sub">I've been counting down for 3 days for your birthday. Your birthday is one of the most
+      important days in my life, so today I'm so happy to send you my wishes 💌</p>
+
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div class="unit"><div class="num" id="cd-days">00</div><div class="label">Days</div></div>
+      <div class="unit"><div class="num" id="cd-hours">00</div><div class="label">Hours</div></div>
+      <div class="unit"><div class="num" id="cd-mins">00</div><div class="label">Minutes</div></div>
+      <div class="unit"><div class="num" id="cd-secs">00</div><div class="label">Seconds</div></div>
+    </div>
+
+    <a href="#timeline" class="cta-btn">See Your Journey</a>
+    <div class="scroll-hint" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============================================================
+     2. THE CHAPTERS OF US — chronological photo timeline
+     ============================================================ -->
+  <section class="timeline-section section-pad" id="timeline">
+    <div class="timeline-intro reveal">
+      <p class="eyebrow">The Chapters of Us</p>
+      <h2 class="section-title">Every version of you</h2>
+      <p>I’ve kept some pictures here of different versions of the person I love most. I love every version of you, and
+        I want to love you for my whole life. I want to love you until the very
+        last moment of your life.
+        💝🌹</p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- CHAPTER 1 : Childhood -->
+      <div class="chapter reveal">
+        <span class="chapter-node"></span>
+        <div class="chapter-text">
+          <p class="chapter-mark">Chapter One</p>
+          <h3 class="chapter-title">The Little Princess</h3>
+          <!-- PERSONALIZE: swap in something you actually know about her childhood, or a line about looking through her old photos -->
+          <p>I wasn’t there for this part of your life, but looking at these photos makes me feel how cute my baby was.
+            Little Nisa has grown up so much now, MashaAllah.🥹💗</p>
+        </div>
+        <div class="chapter-media">
+          <!-- 🖼️ REPLACE: childhood photo of Anika -->
+          <div class="frame">
+            <img src="https://via.placeholder.com/400x500" alt="Anika as a child" loading="lazy">
+            <p class="frame-caption">before I knew you, but not before you were you</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAPTER 2 : Teenage years -->
+      <div class="chapter reveal">
+        <span class="chapter-node"></span>
+        <div class="chapter-text">
+          <p class="chapter-mark">Chapter Two</p>
+          <h3 class="chapter-title">Growing Into Grace</h3>
+          <!-- PERSONALIZE: a real detail about her teenage years, school, friends, or a story she's told you -->
+          <p>Time flew by and My girl grew up. A cute girl in my life in school days. Even though I don’t have many
+            pictures from your school life 😞 this one reminds me of the old Nisa. I’ve come this far just by loving
+            this Nisa.❤️</p>
+        </div>
+        <div class="chapter-media">
+          <!-- 🖼️ REPLACE: teenage photo of Anika -->
+          <div class="frame">
+            <img src="https://via.placeholder.com/400x500" alt="Anika in her teenage years" loading="lazy">
+            <p class="frame-caption">becoming, one ordinary day at a time</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAPTER 3 : Present day / meeting -->
+      <div class="chapter reveal">
+        <span class="chapter-node"></span>
+        <div class="chapter-text">
+          <p class="chapter-mark">Chapter Three</p>
+          <h3 class="chapter-title">The Present</h3>
+          <!-- PERSONALIZE: this is the most important paragraph on the page — replace it with how you actually met her, or the moment you knew -->
+          <p>And my present Panda 🐼 is the cutest of them all. I love every version of you, and I’m so happy to have my
+            present Nisa with me. So many wishes for my baby. I want to be by your side and keep wishing for you like
+            this for our whole lives.🎂💝</p>
+        </div>
+        <div class="chapter-media">
+          <!-- 🖼️ REPLACE: recent / present-day photo of Anika, or of the two of you -->
+          <div class="frame">
+            <img src="https://via.placeholder.com/400x500" alt="Anika today" loading="lazy">
+            <p class="frame-caption">the chapter I'm still living, gladly</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+     3. OUR MEMORIES — a gallery of you and me
+     ============================================================ -->
+  <section class="memories-section section-pad">
+    <div class="memories-intro reveal">
+      <p class="eyebrow">Our Memories</p>
+      <h2 class="section-title">A few of my favorite days</h2>
+      <!-- PERSONALIZE: a line about what these photos mean to you as a set -->
+      <p>"We have so many moments in our life, so many memories that will always stay in my mind. But still, I made this
+        album to hold onto some of them 😞🫶🏽 I’m missing you so much on your special day today. Every moment I’ve
+        spent with you is the best moment of my life. Today I feel so loved for you.❤️🌷</p>
+    </div>
+
+    <div class="memories-grid">
+      <!-- 🖼️ REPLACE all 6 images + captions with real photos and real memories -->
+      <div class="mem-item reveal">
+        <img src="https://via.placeholder.com/400x400" alt="A memory together" loading="lazy">
+        <p class="mem-caption">PERSONALIZE: where was this taken, and why does it matter?</p>
+      </div>
+      <div class="mem-item reveal">
+        <img src="https://via.placeholder.com/400x600" alt="A memory together" loading="lazy">
+        <p class="mem-caption">PERSONALIZE: the day you couldn't stop laughing</p>
+      </div>
+      <div class="mem-item reveal">
+        <img src="https://via.placeholder.com/400x400" alt="A memory together" loading="lazy">
+        <p class="mem-caption">PERSONALIZE: a quiet, ordinary moment worth keeping</p>
+      </div>
+      <div class="mem-item reveal">
+        <img src="https://via.placeholder.com/400x400" alt="A memory together" loading="lazy">
+        <p class="mem-caption">PERSONALIZE: the first trip, call, or date</p>
+      </div>
+      <div class="mem-item reveal">
+        <img src="https://via.placeholder.com/400x600" alt="A memory together" loading="lazy">
+        <p class="mem-caption">PERSONALIZE: the photo you didn't know I'd saved</p>
+      </div>
+      <div class="mem-item reveal">
+        <img src="https://via.placeholder.com/400x400" alt="A memory together" loading="lazy">
+        <p class="mem-caption">PERSONALIZE: today, and everything still ahead</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     4. REASONS WHY I LOVE YOU — flip cards
+     ============================================================ -->
+  <section class="reasons-section section-pad">
+    <div class="reasons-intro reveal">
+      <p class="eyebrow">A Few Reasons, Among Thousands</p>
+      <h2 class="section-title">Why I love you</h2>
+    </div>
+
+    <div class="reasons-grid">
+      <div class="reason-card reveal" tabindex="0">
+        <div class="reason-inner">
+          <div class="reason-face reason-front">
+            <div class="icon">🌸</div>
+            <h3>Your Smile</h3>
+            <p class="hint">hover to reveal</p>
+          </div>
+          <div class="reason-face reason-back">
+            <!-- PERSONALIZE -->
+            <p>I fell in love the very first time I saw that cuteee smile on your beautiful, loving face 🫶🏽🌸</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reason-card reveal" tabindex="0">
+        <div class="reason-inner">
+          <div class="reason-face reason-front">
+            <div class="icon">💗</div>
+            <h3>Your Love</h3>
+            <p class="hint">hover to reveal</p>
+          </div>
+          <div class="reason-face reason-back">
+            <!-- PERSONALIZE -->
+            <p>Having the same feelings and the same love for me now makes me so happy makes me feel so loved. 💗</p>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="reason-card reveal" tabindex="0">
+        <div class="reason-inner">
+          <div class="reason-face reason-front">
+            <div class="icon">🫶🏽</div>
+            <h3>Your Support</h3>
+            <p class="hint">hover to reveal</p>
+          </div>
+          <div class="reason-face reason-back">
+            <!-- PERSONALIZE -->
+            <p>Always. Your support during any bad time, everything it’s one of the biggest blessings of my life.🫶🏽
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reason-card reveal" tabindex="0">
+        <div class="reason-inner">
+          <div class="reason-face reason-front">
+            <div class="icon">🤍</div>
+            <h3>Simply You</h3>
+            <p class="hint">hover to reveal</p>
+          </div>
+          <div class="reason-face reason-back">
+            <!-- PERSONALIZE -->
+            <p>I love very simple people who have no ego or attitude. And you’re a lot like that. You’re that simple
+              person in my life. 🤍</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reason-card reveal" tabindex="0">
+      <div class="reason-inner">
+        <div class="reason-face reason-front">
+          <div class="icon">🤗</div>
+          <h3>Your Care</h3>
+          <p class="hint">hover to reveal</p>
+        </div>
+        <div class="reason-face reason-back">
+          <!-- PERSONALIZE -->
+          <p>Your love, your care, everything — they are the biggest blessings in my life. I always want this kind of
+            care from you.🤗</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="reason-card reveal" tabindex="0">
+      <div class="reason-inner">
+        <div class="reason-face reason-front">
+          <div class="icon">❤️</div>
+          <h3>Full of you</h3>
+          <p class="hint">hover to reveal</p>
+        </div>
+        <div class="reason-face reason-back">
+          <!-- PERSONALIZE -->
+          <p>At the end of the day, my heart is full of you. I feel so loved. I love everything about you. I love the
+            complete you.❤️🌸</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     5. THE BIG WISH — letter + release-a-wish interaction
+     ============================================================ -->
+  <section class="wish-section section-pad">
+    <div class="letter reveal">
+      <p class="eyebrow" style="text-align:center; display:block; margin-bottom:1.4rem;">The Big Wish</p>
+
+      <!-- PERSONALIZE: this whole letter. What I've written is honest but generic —
+         replace it with things only you know: an inside joke, something she said once
+         that you never forgot, what this year with her actually felt like to you. -->
+      <div>
+        <p>Nishu,</p>
+        <p>Happy Birthday, panda! 🐼💖 A panda being born on this day has created so many happy moments in my life. 🫶🏽
+          Anyway, I won’t annoy you on your birthday, for now, I have nothing to give you without love. On this day, I
+          pray even more that Allah always keeps you healthy, happy, well, and keeps you mine
+          forever.</p>
+        <p>I want to spend the rest of my life with you, filled with love. 💖 I hope I will keep wishing you like this
+          every single year on this day, right by your side. I can't explain how important person you are in my life and
+          can never be
+          explained through messages, so I don't want to say much more just giving you my prayers and love.</p>
+        <p>This is just a small try to make you happy. Don't know how happy it makes you, but even
+          if it makes you a little bit happy, that will makes happy to me. At the end, these are my last words I love
+          you so muchhh! and want to keep loving you always.❤️🌹</p>
+        <p>And again Happy Birthday, my Panda! 🎉💝</p>
+        <p class="signoff">— Yours, always</p>
+      </div>
+
+      <!-- WISH RELEASE INTERACTION -->
+      <div class="heart-wrap reveal">
+        <p class="heart-instruction" id="heartInstruction">Tap the heart to send your wish</p>
+        <button class="heart-btn" id="releaseHeartBtn" aria-label="Release a wish">❤</button>
+        <p class="wish-made" id="wishMade"></p>
+      </div>
+  </section>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ============================================================
+     6. FOOTER
+     ============================================================ -->
+  <footer>
+    <p class="foot-name">Nishu · 17 July 2003</p>
+    <p class="foot-sub">Made with love, forever and always, for Nisa.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
