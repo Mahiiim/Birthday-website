@@ -12,6 +12,12 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Preload hero album images for faster initial display -->
+  <link rel="preload" as="image" href="assets/images/IMG_6752.JPEG">
+  <link rel="preload" as="image" href="assets/images/IMG_6757.JPEG">
+  <link rel="preload" as="image" href="assets/images/IMG_6764.JPEG">
+  <link rel="preload" as="image" href="assets/images/IMG_6754.JPEG">
 </head>
 
 <body>
@@ -69,10 +75,10 @@
     <!-- bottom-right "college album", fixed 50% opacity -->
     <div class="hero-album" aria-hidden="true">
       <!-- 🖼️ REPLACE all 4 with real photos of Nishu -->
-      <img src="assets/images/IMG_6752.JPEG" alt="">
-      <img src="assets/images/IMG_6757.JPEG" alt="">
-      <img src="assets/images/IMG_6764.JPEG" alt="">
-      <img src="assets/images/IMG_6754.JPEG" alt="">
+      <img src="assets/images/IMG_6752.JPEG" alt="" fetchpriority="high" decoding="sync">
+      <img src="assets/images/IMG_6757.JPEG" alt="" fetchpriority="high" decoding="sync">
+      <img src="assets/images/IMG_6764.JPEG" alt="" fetchpriority="high" decoding="sync">
+      <img src="assets/images/IMG_6754.JPEG" alt="" fetchpriority="high" decoding="sync">
     </div>
 
     <!-- celebration layer: video (optional) + canvas, sits behind the text -->
