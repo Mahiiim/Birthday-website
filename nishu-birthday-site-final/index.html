@@ -11,6 +11,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
+  <link rel="preload" as="image"
+    href="/.netlify/images?url=/assets/images/IMG_6752.JPEG&w=400&fm=avif&q=80"
+    imagesrcset="/.netlify/images?url=/assets/images/IMG_6752.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6752.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6752.JPEG&w=1200&fm=avif&q=80 1200w"
+    imagesizes="(max-width: 700px) 100px, 150px" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -69,16 +73,24 @@
     <!-- bottom-right "college album", fixed 50% opacity -->
     <div class="hero-album" aria-hidden="true">
       <!-- 🖼️ REPLACE all 4 with real photos of Nishu -->
-      <img src="assets/images/IMG_6752.JPEG" alt="">
-      <img src="assets/images/IMG_6757.JPEG" alt="">
-      <img src="assets/images/IMG_6764.JPEG" alt="">
-      <img src="assets/images/IMG_6754.JPEG" alt="">
+      <img src="/.netlify/images?url=/assets/images/IMG_6752.JPEG&w=400&fm=avif&q=80"
+        srcset="/.netlify/images?url=/assets/images/IMG_6752.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6752.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6752.JPEG&w=1200&fm=avif&q=80 1200w"
+        sizes="(max-width: 700px) 100px, 150px" width="405" height="829" alt="" fetchpriority="high">
+      <img src="/.netlify/images?url=/assets/images/IMG_6757.JPEG&w=400&fm=avif&q=80"
+        srcset="/.netlify/images?url=/assets/images/IMG_6757.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6757.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6757.JPEG&w=1200&fm=avif&q=80 1200w"
+        sizes="(max-width: 700px) 100px, 150px" width="671" height="1280" alt="" fetchpriority="low" decoding="async">
+      <img src="/.netlify/images?url=/assets/images/IMG_6764.JPEG&w=400&fm=avif&q=80"
+        srcset="/.netlify/images?url=/assets/images/IMG_6764.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6764.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6764.JPEG&w=1200&fm=avif&q=80 1200w"
+        sizes="(max-width: 700px) 100px, 150px" width="3024" height="4032" alt="" fetchpriority="low" decoding="async">
+      <img src="/.netlify/images?url=/assets/images/IMG_6754.JPEG&w=400&fm=avif&q=80"
+        srcset="/.netlify/images?url=/assets/images/IMG_6754.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6754.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6754.JPEG&w=1200&fm=avif&q=80 1200w"
+        sizes="(max-width: 700px) 100px, 150px" width="1280" height="877" alt="" fetchpriority="low" decoding="async">
     </div>
 
     <!-- celebration layer: video (optional) + canvas, sits behind the text -->
     <!-- 🎥 REPLACE the src below with a real fireworks/celebration video URL.
          If left as-is (or if it fails to load), the canvas sparkle burst plays instead automatically. -->
-    <video id="celebration-video" muted playsinline loop src="REPLACE-WITH-YOUR-CELEBRATION-VIDEO.mp4"></video>
+    <video id="celebration-video" muted playsinline loop preload="none"></video>
     <canvas id="celebration-canvas"></canvas>
 
     <div class="hero-content">
@@ -197,7 +209,10 @@
         <div class="chapter-media">
           <!-- 🖼️ REPLACE: childhood photo of Anika -->
           <div class="frame">
-            <img src="assets/images/IMG_6738.JPEG" alt="Anika as a child" loading="lazy">
+            <img src="/.netlify/images?url=/assets/images/IMG_6738.JPEG&w=800&fm=avif&q=80"
+              srcset="/.netlify/images?url=/assets/images/IMG_6738.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6738.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6738.JPEG&w=1200&fm=avif&q=80 1200w"
+              sizes="(max-width: 800px) calc(100vw - 72px), 360px" width="746" height="788" alt="Anika as a child"
+              loading="lazy" decoding="async">
             <p class="frame-caption">before I knew you, My sweet little girl 🥹💗</p>
           </div>
         </div>
@@ -217,7 +232,10 @@
         <div class="chapter-media">
           <!-- 🖼️ REPLACE: teenage photo of Anika -->
           <div class="frame">
-            <img src="assets/images/IMG_6754.JPEG" alt="Anika in her teenage years" loading="lazy">
+            <img src="/.netlify/images?url=/assets/images/IMG_6754.JPEG&w=800&fm=avif&q=80"
+              srcset="/.netlify/images?url=/assets/images/IMG_6754.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6754.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6754.JPEG&w=1200&fm=avif&q=80 1200w"
+              sizes="(max-width: 800px) calc(100vw - 72px), 360px" width="1280" height="877"
+              alt="Anika in her teenage years" loading="lazy" decoding="async">
             <p class="frame-caption">My known panda 🐼</p>
           </div>
         </div>
@@ -237,7 +255,10 @@
         <div class="chapter-media">
           <!-- 🖼️ REPLACE: recent / present-day photo of Anika, or of the two of you -->
           <div class="frame">
-            <img src="assets/images/IMG_5138.JPG.jpeg" alt="Anika today" loading="lazy">
+            <img src="/.netlify/images?url=/assets/images/IMG_5138.JPG.jpeg&w=800&fm=avif&q=80"
+              srcset="/.netlify/images?url=/assets/images/IMG_5138.JPG.jpeg&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_5138.JPG.jpeg&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_5138.JPG.jpeg&w=1200&fm=avif&q=80 1200w"
+              sizes="(max-width: 800px) calc(100vw - 72px), 360px" width="1200" height="1600" alt="Anika today"
+              loading="lazy" decoding="async">
             <p class="frame-caption">the chapter I'm still living, gladly 💗</p>
           </div>
         </div>
@@ -262,29 +283,47 @@
     <div class="memories-grid">
       <!-- 🖼️ REPLACE all 6 images + captions with real photos and real memories -->
       <div class="mem-item reveal">
-        <img src="assets/images/IMG_6750.JPEG" alt="A memory together" loading="lazy">
+        <img src="/.netlify/images?url=/assets/images/IMG_6750.JPEG&w=800&fm=avif&q=80"
+          srcset="/.netlify/images?url=/assets/images/IMG_6750.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6750.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6750.JPEG&w=1200&fm=avif&q=80 1200w"
+          sizes="(max-width: 520px) 88vw, (max-width: 820px) 44vw, 350px" width="1440" height="1080" alt="A memory together"
+          loading="lazy" decoding="async">
         <p class="mem-caption">PERSONALIZE: Our first outside date 💗</p>
       </div>
       <div class="mem-item reveal">
-        <img src="assets/images/IMG_6762.jpg" alt="A memory together" loading="lazy">
+        <img src="/.netlify/images?url=/assets/images/IMG_6762.jpg&w=800&fm=avif&q=80"
+          srcset="/.netlify/images?url=/assets/images/IMG_6762.jpg&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6762.jpg&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6762.jpg&w=1200&fm=avif&q=80 1200w"
+          sizes="(max-width: 520px) 88vw, (max-width: 820px) 44vw, 350px" width="3024" height="4032" alt="A memory together"
+          loading="lazy" decoding="async">
         <p class="mem-caption">PERSONALIZE: A recent moment, a forever memory 🫶🏽</p>
       </div>
       <div class="mem-item reveal">
-        <img src="assets/images/IMG_5630.JPG.jpeg" alt="A memory together" loading="lazy">
+        <img src="/.netlify/images?url=/assets/images/IMG_5630.JPG.jpeg&w=800&fm=avif&q=80"
+          srcset="/.netlify/images?url=/assets/images/IMG_5630.JPG.jpeg&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_5630.JPG.jpeg&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_5630.JPG.jpeg&w=1200&fm=avif&q=80 1200w"
+          sizes="(max-width: 520px) 88vw, (max-width: 820px) 44vw, 350px" width="3088" height="2320" alt="A memory together"
+          loading="lazy" decoding="async">
         <p class="mem-caption">PERSONALIZE:One of the best tours of my life. A memory I can never forget. </p>
       </div>
       <div class="mem-item reveal">
-        <img src="assets/images/IMG_6756.JPEG" alt="A memory together" loading="lazy">
+        <img src="/.netlify/images?url=/assets/images/IMG_6756.JPEG&w=800&fm=avif&q=80"
+          srcset="/.netlify/images?url=/assets/images/IMG_6756.JPEG&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6756.JPEG&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6756.JPEG&w=1200&fm=avif&q=80 1200w"
+          sizes="(max-width: 520px) 88vw, (max-width: 820px) 44vw, 350px" width="1280" height="960" alt="A memory together"
+          loading="lazy" decoding="async">
         <p class="mem-caption">PERSONALIZE: Our college date memory. Fulfilling your cute little wishes, and capturing
           all those adorable pics and videos of USS 🫶🏽</p>
       </div>
       <div class="mem-item reveal">
-        <img src="assets/images/IMG_6412.WEBP" alt="A memory together" loading="lazy">
+        <img src="/.netlify/images?url=/assets/images/IMG_6412.WEBP&w=800&fm=avif&q=80"
+          srcset="/.netlify/images?url=/assets/images/IMG_6412.WEBP&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6412.WEBP&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6412.WEBP&w=1200&fm=avif&q=80 1200w"
+          sizes="(max-width: 520px) 88vw, (max-width: 820px) 44vw, 350px" width="1080" height="1920" alt="A memory together"
+          loading="lazy" decoding="async">
         <p class="mem-caption">PERSONALIZE: Our captured moments will never end. Every picture, every moment is so
           precious. Here I’ve just shared a few of them.</p>
       </div>
       <div class="mem-item reveal">
-        <img src="assets/images/IMG_6767.jpg" alt="A memory together" loading="lazy">
+        <img src="/.netlify/images?url=/assets/images/IMG_6767.jpg&w=800&fm=avif&q=80"
+          srcset="/.netlify/images?url=/assets/images/IMG_6767.jpg&w=400&fm=avif&q=80 400w, /.netlify/images?url=/assets/images/IMG_6767.jpg&w=800&fm=avif&q=80 800w, /.netlify/images?url=/assets/images/IMG_6767.jpg&w=1200&fm=avif&q=80 1200w"
+          sizes="(max-width: 520px) 88vw, (max-width: 820px) 44vw, 350px" width="3088" height="2320" alt="A memory together"
+          loading="lazy" decoding="async">
         <p class="mem-caption">PERSONALIZE: Eid and all the festival moments become so much happier when I get to spend
           them with you 🤍</p>
       </div>
@@ -432,7 +471,7 @@
     <p class="foot-sub">Made with love, forever and always, for Nisa.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 
 </html>

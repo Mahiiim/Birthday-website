@@ -108,6 +108,15 @@ button {
   padding: 6rem 6vw;
 }
 
+.timeline-section,
+.memories-section,
+.reasons-section,
+.wish-section,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 @media (max-width:700px) {
   .section-pad {
     padding: 4.5rem 6vw;
