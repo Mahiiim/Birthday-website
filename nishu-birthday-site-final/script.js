@@ -325,10 +325,12 @@ const Confetti = (function () {
 
   function celebrate() {
     // try the video celebration first; canvas always runs as a guaranteed layer
-    video.currentTime = 0;
-    video.play().then(() => {
-      video.classList.add('playing');
-    }).catch(() => { });
+    if (video.currentSrc) {
+      video.currentTime = 0;
+      video.play().then(() => {
+        video.classList.add('playing');
+      }).catch(() => { });
+    }
     runCelebrationCanvas();
     window.__startBgMusic && window.__startBgMusic();
 
