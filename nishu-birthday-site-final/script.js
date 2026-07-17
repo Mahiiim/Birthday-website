@@ -139,11 +139,15 @@ const BirthdayMusic = (function () {
   }
 
   return {
-    start() {
+    async start() {
       ensureCtx();
-      if (ctx.state === 'suspended') ctx.resume();
+      // iOS Safari requires resume() to fully complete before any audio plays
+      if (ctx.state === 'suspended') {
+        try { await ctx.resume(); } catch (_) {}
+      }
       if (playing) return;
       playing = true;
+      masterGain.gain.value = 0.08; // slightly louder for mobile speakers
       scheduleLoop();
     },
     stop() {
