@@ -319,6 +319,7 @@ const Confetti = (function () {
   function closeGate() {
     gate.classList.add('gate-closing');
     document.body.classList.remove('gate-active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
     setTimeout(() => { gate.hidden = true; }, 1150);
   }
 
