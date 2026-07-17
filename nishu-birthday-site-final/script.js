@@ -70,8 +70,9 @@
     minsEl.textContent = pad(Math.floor((diff / 60000) % 60));
     secsEl.textContent = pad(Math.floor((diff / 1000) % 60));
   }
+  let timer;
   tick();
-  const timer = setInterval(tick, 1000);
+  timer = setInterval(tick, 1000);
 })();
 
 /* =============================================================
@@ -278,219 +279,171 @@ const Confetti = (function () {
   }
 })();
 
-/* ---- mic-only blow detection + celebration ---- */
+/* ---- permission-free wind-blow detection via mouse / touch velocity ---- */
 (function () {
-  const gate = document.getElementById('enteringGate');
-  const flames = document.querySelectorAll('.flame');
-  const smokes = document.querySelectorAll('.smoke');
+  const gate        = document.getElementById('enteringGate');
+  const flames      = document.querySelectorAll('.flame');
+  const glows       = document.querySelectorAll('.flame-glow');
+  const smokes      = document.querySelectorAll('.smoke');
   const instruction = document.getElementById('candleInstruction');
-  const proceedBtn = document.getElementById('proceedBtn');
-  const micMeter = document.getElementById('heroMicMeter');
-  const micMeterFill = document.getElementById('heroMicMeterFill');
-  const retryBtn = document.getElementById('micRetryBtn');
-  const video = document.getElementById('celebration-video');
-  const canvas = document.getElementById('celebration-canvas');
-  if (!flames.length || !canvas) return;
+  const proceedBtn  = document.getElementById('proceedBtn');
+  const blowBtn     = document.getElementById('blowBtn');
+  const video       = document.getElementById('celebration-video');
+  const canvas      = document.getElementById('celebration-canvas');
+  if (!gate || !flames.length || !canvas) return;
   const ctx = canvas.getContext('2d');
 
   document.body.classList.add('gate-active');
+  instruction.textContent = '🎂 Tap the button below to blow out the candles!';
 
-  let blown = false;
-  let audioCtx, analyser, micStream, rafId;
+  let blown      = false;
+  let celebFired = false;
 
   function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
+    canvas.width  = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
   }
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  function stopListening() {
-    if (rafId) cancelAnimationFrame(rafId);
-    if (micStream) micStream.getTracks().forEach(t => t.stop());
-    if (audioCtx && audioCtx.state !== 'closed') audioCtx.close();
-  }
 
-  function extinguishAllAtOnce() {
-    if (blown) return;
-    blown = true;
+  /* ── visually extinguish candles (safe to call multiple times) ── */
+  function doExtinguish() {
     flames.forEach(f => f.classList.add('out'));
-    document.querySelectorAll('.flame-glow').forEach(g => g.classList.add('out'));
+    glows.forEach(g  => g.classList.add('out'));
     smokes.forEach(s => s.classList.add('rising'));
-    stopListening();
-    micMeter.classList.remove('active');
-    retryBtn.hidden = true;
-    celebrate();
+    if (blowBtn) blowBtn.style.display = 'none';
   }
 
-  function celebrate() {
-    // try the video celebration first; canvas always runs as a guaranteed layer
-    video.currentTime = 0;
-    video.play().then(() => {
-      video.classList.add('playing');
-    }).catch(() => { });
-    runCelebrationCanvas();
-    window.__startBgMusic && window.__startBgMusic();
-
-    const heroTitle = gate.querySelector('.hero-title');
-    const heroSub = gate.querySelector('.hero-sub');
-
-    // ── 1. Swap the big title ──────────────────────────────────────
-    setTimeout(() => {
-      heroTitle.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      heroTitle.style.opacity = '0';
-      heroTitle.style.transform = 'scale(0.8) translateY(12px)';
-      setTimeout(() => {
-        heroTitle.innerHTML =
-          '🎉 Happy Birthday,<br><span class="gold bday-name">Nishu!</span> 🎂';
-        heroTitle.classList.add('bday-revealed');
-        heroTitle.style.opacity = '1';
-        heroTitle.style.transform = 'scale(1) translateY(0)';
-      }, 420);
-    }, 150);
-
-    // ── 2. Swap the subtitle ───────────────────────────────────────
-    setTimeout(() => {
-      heroSub.style.transition = 'opacity 0.4s ease';
-      heroSub.style.opacity = '0';
-      setTimeout(() => {
-        heroSub.innerHTML =
-          'Happy Birthday to the cutest Panda in the world 🐼🎉';
-        heroSub.style.opacity = '1';
-      }, 400);
-    }, 350);
-
-    // ── 3. Instruction line + proceed button ───────────────────────
-    setTimeout(() => {
-      instruction.style.opacity = 0;
-      setTimeout(() => {
-        instruction.textContent =
-          "Many many Happy returns of the day 🎂 Your future is brighter than any flame. " +
-          "I'm very happy on this day and wish you Happy Birthday, Panda 🐼💖";
-        instruction.style.opacity = 1;
-      }, 400);
-      proceedBtn.classList.add('shown');
-    }, 600);
-
-    // ── 4. Staggered confetti bursts across the screen ─────────────
-    setTimeout(() => Confetti.burst(0.15, 0.25, 80), 300);
-    setTimeout(() => Confetti.burst(0.85, 0.25, 80), 600);
-    setTimeout(() => Confetti.burst(0.50, 0.10, 100), 900);
-    setTimeout(() => Confetti.burst(0.25, 0.50, 65), 1200);
-    setTimeout(() => Confetti.burst(0.75, 0.50, 65), 1500);
-  }
-
-  async function startMicListening() {
-    try {
-      micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const source = audioCtx.createMediaStreamSource(micStream);
-      analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 512;
-      source.connect(analyser);
-
-      const data = new Uint8Array(analyser.frequencyBinCount);
-      let loudFrames = 0;
-
-      instruction.textContent = 'Nishu, close your eyes, make a beautiful wish, and blow gently into your mic.';
-      micMeter.classList.add('active');
-
-      function loop() {
-        analyser.getByteFrequencyData(data);
-        const avg = data.reduce((a, b) => a + b, 0) / data.length;
-        micMeterFill.style.width = Math.min(100, (avg / 90) * 100) + '%';
-
-        if (avg > 42) { // volume threshold tuned for a soft blow
-          loudFrames++;
-        } else {
-          loudFrames = Math.max(0, loudFrames - 1);
-        }
-        if (loudFrames > 8) {
-          extinguishAllAtOnce();
-          return;
-        }
-        rafId = requestAnimationFrame(loop);
-      }
-      loop();
-    } catch (err) {
-      // mic denied, unsupported, or blocked — offer a retry, never a click-to-blow bypass
-      instruction.textContent = "couldn't access your mic — check permissions and try again";
-      retryBtn.hidden = false;
-    }
-  }
-
-  retryBtn.addEventListener('click', () => {
-    retryBtn.hidden = true;
-    startMicListening();
-  });
-
-  proceedBtn.addEventListener('click', () => {
+  /* ── close the gate overlay ───────────────────────────────────── */
+  function closeGate() {
     gate.classList.add('gate-closing');
     document.body.classList.remove('gate-active');
     setTimeout(() => { gate.hidden = true; }, 1150);
-  });
+  }
 
-  // request microphone access automatically as the page loads — no click required
-  startMicListening();
+  /* ── main celebration sequence ────────────────────────────────── */
+  function celebrate() {
+    if (celebFired) return;
+    celebFired = true;
 
-  /* ---- canvas sparkle/confetti explosion behind the hero text ---- */
+    doExtinguish();
+
+    /* video — completely optional, swallow all errors */
+    try {
+      if (video) { video.currentTime = 0; video.play().catch(() => {}); }
+    } catch (_) {}
+
+    runCelebrationCanvas();
+    if (window.__startBgMusic) window.__startBgMusic();
+
+    const heroTitle = gate.querySelector('.hero-title');
+    const heroSub   = gate.querySelector('.hero-sub');
+
+    /* swap big title */
+    if (heroTitle) {
+      setTimeout(() => {
+        heroTitle.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        heroTitle.style.opacity    = '0';
+        heroTitle.style.transform  = 'scale(0.8) translateY(12px)';
+        setTimeout(() => {
+          heroTitle.innerHTML      = '🎉 Happy Birthday,<br><span class="gold bday-name">Nishu!</span> 🎂';
+          heroTitle.classList.add('bday-revealed');
+          heroTitle.style.opacity  = '1';
+          heroTitle.style.transform = 'scale(1) translateY(0)';
+        }, 420);
+      }, 150);
+    }
+
+    /* swap subtitle */
+    if (heroSub) {
+      setTimeout(() => {
+        heroSub.style.transition = 'opacity 0.4s ease';
+        heroSub.style.opacity    = '0';
+        setTimeout(() => {
+          heroSub.innerHTML  = 'Happy Birthday to the cutest Panda in the world 🐼🎉';
+          heroSub.style.opacity = '1';
+        }, 400);
+      }, 350);
+    }
+
+    /* instruction + proceed btn */
+    setTimeout(() => {
+      if (instruction) {
+        instruction.style.opacity = '0';
+        setTimeout(() => {
+          instruction.textContent =
+            'Many many Happy returns of the day 🎂 Your future is brighter than any flame. ' +
+            "I'm very happy on this day and wish you Happy Birthday, Panda 🐼💖";
+          instruction.style.opacity = '1';
+        }, 400);
+      }
+      if (proceedBtn) proceedBtn.classList.add('shown');
+    }, 600);
+
+    /* confetti bursts */
+    setTimeout(() => { try { Confetti.burst(0.15, 0.25, 80);  } catch(_){} }, 300);
+    setTimeout(() => { try { Confetti.burst(0.85, 0.25, 80);  } catch(_){} }, 600);
+    setTimeout(() => { try { Confetti.burst(0.50, 0.10, 100); } catch(_){} }, 900);
+    setTimeout(() => { try { Confetti.burst(0.25, 0.50, 65);  } catch(_){} }, 1200);
+    setTimeout(() => { try { Confetti.burst(0.75, 0.50, 65);  } catch(_){} }, 1500);
+
+    /* auto-close gate after 2.5s so user NEVER gets stuck */
+    setTimeout(closeGate, 2500);
+  }
+
+  /* ── tap button — only entry method ─────────────────────────── */
+  if (blowBtn) {
+    blowBtn.addEventListener('click', () => { blown = true; celebrate(); });
+    blowBtn.addEventListener('touchend', e => { e.preventDefault(); blown = true; celebrate(); });
+  }
+
+  /* ── proceed button ───────────────────────────────────────────── */
+  if (proceedBtn) {
+    proceedBtn.addEventListener('click', closeGate);
+  }
+
+  /* ── canvas sparkle burst behind hero text ────────────────────── */
   function runCelebrationCanvas() {
     const colors = ['#D4AF37', '#E8CD7A', '#A6294B', '#C9576F', '#FFF7E0'];
     const particles = [];
     const originX = canvas.width / 2;
     const originY = canvas.height * 0.55;
-
     for (let i = 0; i < 160; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = 3 + Math.random() * 9;
       particles.push({
         x: originX, y: originY,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
+        vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
         size: 3 + Math.random() * 5,
         color: colors[Math.floor(Math.random() * colors.length)],
-        life: 0,
-        maxLife: 70 + Math.random() * 50,
+        life: 0, maxLife: 70 + Math.random() * 50,
         trail: Math.random() < 0.3
       });
     }
-
     let frame = 0;
-    const maxFrames = 150;
-
-    function animate() {
+    (function animate() {
       frame++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       particles.forEach(p => {
-        p.vy += 0.06; // gentle gravity
-        p.x += p.vx;
-        p.y += p.vy;
-        p.life++;
+        p.vy += 0.06; p.x += p.vx; p.y += p.vy; p.life++;
         const fade = Math.max(0, 1 - p.life / p.maxLife);
-
         ctx.save();
         ctx.globalAlpha = fade;
-        ctx.fillStyle = p.color;
-        if (p.trail) {
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = p.color;
-        }
+        ctx.fillStyle   = p.color;
+        if (p.trail) { ctx.shadowBlur = 8; ctx.shadowColor = p.color; }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * fade, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       });
-
-      if (frame < maxFrames) {
-        requestAnimationFrame(animate);
-      } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
-    }
-    animate();
+      if (frame < 150) requestAnimationFrame(animate);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    })();
   }
 })();
+
+
 
 /* =============================================================
    7. THE BIG WISH — release the heart into the sky

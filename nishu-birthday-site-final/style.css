@@ -272,7 +272,7 @@ button:focus-visible {
 
 /* =============================================================
    HERO / FRONT PAGE — reconstructed per the Nishu template.
-   Candles are extinguished only by a real mic-detected blow.
+   Candles are extinguished by a fast swipe or the blow button.
    ============================================================= */
 .hero{
   position:relative;
@@ -460,6 +460,16 @@ button:focus-visible {
 }
 .cta-btn:hover{ transform:translateY(-3px); box-shadow:0 18px 38px rgba(92,26,43,.34); }
 
+/* celebration canvas + video must NEVER block button clicks */
+#celebration-canvas,
+#celebration-video {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* =============================================================
    CANDLE STAGE
    ============================================================= */
@@ -477,7 +487,7 @@ button:focus-visible {
 .candle-wrap svg{ width:100%; height:100%; display:block; }
 .cake-wrap{ width:min(300px, 74vw); height:auto; }
 
-/* candles have no click handlers — they only respond to a real mic-detected blow */
+/* candles respond to fast swipes and the tap-to-blow button */
 .flame{
   transform-origin:center bottom;
   animation:flicker 1.3s ease-in-out infinite;
@@ -543,6 +553,35 @@ button:focus-visible {
 }
 .hero-retry-btn:hover{ background:var(--rose-deep); color:var(--white-glow); }
 .hero-retry-btn[hidden]{ display:none; }
+
+/* ── tap-to-blow button — always visible, guarantees entry on every device ── */
+.blow-btn {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: .04em;
+  font-size: 1rem;
+  color: var(--white-glow);
+  background: linear-gradient(120deg, var(--rose-deep), var(--gold) 160%);
+  border: none;
+  padding: 1rem 2.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(92, 26, 43, .28), 0 0 22px rgba(212, 175, 55, .3);
+  animation: blowPulse 2.2s ease-in-out infinite;
+  transition: transform .3s ease, box-shadow .3s ease;
+  position: relative;
+  z-index: 3;
+}
+.blow-btn:hover,
+.blow-btn:focus-visible {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 16px 38px rgba(92, 26, 43, .36), 0 0 36px rgba(212, 175, 55, .5);
+}
+.blow-btn:active { transform: scale(.97); }
+@keyframes blowPulse {
+  0%,100% { box-shadow: 0 10px 28px rgba(92,26,43,.28), 0 0 22px rgba(212,175,55,.28); }
+  50%      { box-shadow: 0 10px 28px rgba(92,26,43,.28), 0 0 44px rgba(212,175,55,.6); }
+}
 
 /* glowing proceed button */
 .proceed-btn{

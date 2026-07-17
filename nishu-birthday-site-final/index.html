@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Explicitly block microphone access — this site uses swipe/touch detection only, never a mic -->
+  <meta http-equiv="Permissions-Policy" content="microphone=()">
   <title>Happy Birthday, Nishu</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  
+
   <!-- Preload hero album images for faster initial display -->
   <link rel="preload" as="image" href="assets/images/IMG_6752.JPEG">
   <link rel="preload" as="image" href="assets/images/IMG_6757.JPEG">
@@ -40,9 +42,8 @@
   </button>
 
   <!-- ============================================================
-     1. ENTERING GATE — the candle-blow interaction, unchanged, now
-     as a fixed overlay she meets first. Candles are blown out only
-     by an actual mic-detected breath, never by clicking.
+     1. ENTERING GATE — the candle-blow interaction.
+     Candles react to fast mouse / touch swipes — no mic needed.
      ============================================================ -->
   <div class="hero" id="enteringGate">
 
@@ -103,7 +104,7 @@
             <path d="M38 128 Q53 143 68 128 T98 128 T128 128 T158 128 T188 128 T222 128" fill="none" stroke="#D4AF37"
               stroke-width="5" stroke-linecap="round" opacity="0.85" />
 
-            <!-- three candles — no click handlers; blown out only by an actual mic-detected breath -->
+            <!-- three candles — blown out by a fast swipe OR the tap button below -->
             <g>
               <rect x="93" y="48" width="6" height="26" fill="#F7D9DE" />
               <ellipse class="smoke" data-smoke="1" cx="96" cy="33" rx="5" ry="10" fill="#c9b8b0" opacity="0" />
@@ -127,15 +128,8 @@
           </svg>
         </div>
 
-        <div class="hero-mic-meter" id="heroMicMeter">
-          <div class="hero-mic-meter-fill" id="heroMicMeterFill"></div>
-        </div>
-
-        <p class="candle-instruction" id="candleInstruction">
-          Requesting microphone access…
-        </p>
-        <button class="hero-retry-btn" id="micRetryBtn" hidden>Allow microphone access</button>
-
+        <p class="candle-instruction" id="candleInstruction"></p>
+        <button class="blow-btn" id="blowBtn" aria-label="Blow out the candles">🌬️ Blow out the candles</button>
         <button class="proceed-btn" id="proceedBtn">Proceed to our story</button>
       </div>
     </div>
