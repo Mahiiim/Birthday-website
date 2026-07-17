@@ -388,8 +388,7 @@ const Confetti = (function () {
     setTimeout(() => { try { Confetti.burst(0.25, 0.50, 65);  } catch(_){} }, 1200);
     setTimeout(() => { try { Confetti.burst(0.75, 0.50, 65);  } catch(_){} }, 1500);
 
-    /* auto-close gate after 2.5s so user NEVER gets stuck */
-    setTimeout(closeGate, 2500);
+
   }
 
   /* ── tap button — only entry method ─────────────────────────── */
